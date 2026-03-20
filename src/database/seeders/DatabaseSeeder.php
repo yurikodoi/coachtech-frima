@@ -1,18 +1,22 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::firstOrCreate(
+            ['id' => 1],
+            [
+                'name'     => 'テストユーザー',
+                'email'    => 'test@example.com',
+                'password' => bcrypt('password'),
+                'postcode' => '123-4567',
+                'address'  => '東京都墨田区',
+            ]
+        );
+        $this->call([
+            ItemSeeder::class,
+        ]);
     }
 }

@@ -1,0 +1,112 @@
+.mypage {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.mypage__header {
+    margin-bottom: 60px;
+}
+
+.mypage__user-info {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.mypage__image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #d3d3d3;
+    flex-shrink: 0;
+}
+
+.mypage__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mypage__username {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.mypage__edit-btn {
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    padding: 8px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.mypage__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #ccc;
+    margin-bottom: 30px;
+}
+
+input[name="tab_item"] {
+    display: none;
+}
+
+.mypage__tab-label {
+    padding: 15px 30px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    margin-top: -1px;
+    border-top: 3px solid transparent;
+}
+
+#tab_selling:checked~.mypage__tab-label[for="tab_selling"],
+#tab_bought:checked~.mypage__tab-label[for="tab_bought"] {
+    color: #ff4d4d;
+    border-top: 3px solid #ff4d4d;
+}
+
+.mypage__tab-content {
+    display: none;
+    width: 100%;
+}
+
+#tab_selling:checked~#selling_content,
+#tab_bought:checked~#bought_content {
+    display: block;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.item-card {
+    text-decoration: none;
+    color: #333;
+}
+
+.item-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+}
+
+.item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    font-size: 16px;
+    margin: 0;
+    text-align: left;
+}

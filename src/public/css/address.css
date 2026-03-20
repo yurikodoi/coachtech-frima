@@ -1,0 +1,62 @@
+.address-page {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.address-page__title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.address-page__form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group__label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-group__input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #767676;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.address-page__submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff5a5a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.address-page__submit-btn:hover {
+    opacity: 0.8;
+}
+
+.form-group__error {
+    color: #ff5a5a;
+    font-size: 16px;
+    margin-top: 5px;
+}
