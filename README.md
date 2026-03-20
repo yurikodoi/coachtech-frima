@@ -51,13 +51,13 @@ Infrastructure: Docker / Docker Compose
 
 Payment: Stripe API
 
-5. テストの実行
+## 5. テストの実行
 
 全てのテストケース（Feature/Unit）をパスすることを確認済みです。
 
 docker-compose exec php php artisan test
 
-## 5. ER図
+## 6. ER図
 
 ```mermaid
 erDiagram
