@@ -61,116 +61,78 @@ docker-compose exec php php artisan test
 
 ```mermaid
 erDiagram
-    %% --------------------------------------------------
-    %% リレーションシップ定義 (実データに基づく Foreign Key 関係)
-    %% --------------------------------------------------
-
-    %% ユーザーと外部情報
-    users ||--o| profiles : "hasOne (user_id)"
-
-    %% ユーザーのアクション
-    users ||--o{ items : "出品する (user_id)"
-    users ||--o{ orders : "購入する (user_id)"
-    users ||--o{ comments : "コメントする (user_id)"
-    users ||--o{ likes : "いいねする (user_id)"
-    users ||--o{ mylists : "マイリスト保存 (user_id)"
-
-    %% 商品に対するアクション・属性
-    items ||--o{ comments : "コメントがつく (item_id)"
-    items ||--o{ likes : "いいねがつく (item_id)"
-    items ||--o{ mylists : "登録される (item_id)"
-    items ||--o| orders : "購入される (item_id)"
-
-    %% 商品とカテゴリ (多対多)
-    items ||--o{ category_item : "中間テーブル (item_id)"
-    categories ||--o{ category_item : "中間テーブル (category_id)"
-
-    %% --------------------------------------------------
-    %% エンティティ定義 (実データに基づく カラム名と型)
-    %% --------------------------------------------------
+    users ||--o{ items : "出品する"
+    users ||--o{ orders : "購入する"
+    users ||--o{ comments : "コメントする"
+    users ||--o{ likes : "いいねする"
+    users ||--o{ mylists : "保存する"
+    
+    items ||--o{ category_item : "カテゴリを持つ"
+    categories ||--o{ category_item : "属する"
+    
+    items ||--|| orders : "売買成立"
+    items ||--o{ comments : "コメントがつく"
+    items ||--o{ likes : "いいねされる"
+    items ||--o{ mylists : "リストに入る"
 
     users {
-        bigint id PK "Auto Increment"
-        string name "ユーザー名"
-        string email "メールアドレス (UK)"
-        timestamp email_verified_at "メール確認日時"
-        string password "ハッシュパスワード"
-        string remember_token "ログイン保持用"
-        timestamp created_at "作成日時"
-        timestamp updated_at "更新日時"
-    }
-
-    profiles {
-        bigint id PK "Auto Increment"
-        bigint user_id FK "users.id (UK)"
-        string postal_code "郵便番号"
-        string address "住所"
-        string building "建物名"
-        string image_url "プロフィール画像URL"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        string name
+        string email UK
+        string password
+        string postcode
+        string address
+        string building
+        string profile_image
     }
 
     items {
-        bigint id PK "Auto Increment"
-        bigint user_id FK "出品者: users.id"
-        string name "商品名"
-        string brand "ブランド名"
-        unsigned_integer price "価格"
-        text description "商品説明"
-        string image_url "商品画像URL"
-        string condition "状態 (1:良好 2:目立った傷なし 等)"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        bigint user_id FK "出品者"
+        string name
+        string brand
+        integer price
+        text description
+        integer condition
+        string image_url
+        boolean is_sold
     }
 
     categories {
-        bigint id PK "Auto Increment"
-        string name "カテゴリ名 (ファッション, 家電 等)"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        string name
     }
 
     category_item {
-        bigint id PK "Auto Increment"
-        bigint item_id FK "items.id"
-        bigint category_id FK "categories.id"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        bigint item_id FK
+        bigint category_id FK
     }
 
     orders {
-        bigint id PK "Auto Increment"
-        bigint user_id FK "購入者: users.id"
-        bigint item_id FK "items.id"
-        string shipping_postal_code "配送先郵便番号"
-        string shipping_address "配送先住所"
-        string shipping_building "配送先建物名"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        bigint user_id FK "購入者"
+        bigint item_id FK
+        string shipping_postal_code
+        string shipping_address
+        string shipping_building
     }
 
     comments {
-        bigint id PK "Auto Increment"
-        bigint user_id FK "users.id"
-        bigint item_id FK "items.id"
-        text comment "コメント内容"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        bigint user_id FK
+        bigint item_id FK
+        text content
     }
 
     likes {
-        bigint id PK "Auto Increment"
-        bigint user_id FK "users.id"
-        bigint item_id FK "items.id"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        bigint user_id FK
+        bigint item_id FK
     }
 
     mylists {
-        bigint id PK "Auto Increment"
-        bigint user_id FK "users.id"
-        bigint item_id FK "items.id"
-        timestamp created_at
-        timestamp updated_at
+        bigint id PK
+        bigint user_id FK
+        bigint item_id FK
     }
