@@ -1,33 +1,46 @@
-## 1. 機能一覧
+## 1. 開発環境
 
-ユーザー認証: 新規登録、ログイン、メール認証機能。
+言語: PHP 8.1.34
 
-商品出品: 画像アップロード、複数カテゴリ選択、商品の状態設定。
+フレームワーク: Laravel 8.x
 
-商品一覧・検索: 商品名によるキーワード検索、タブ切り替え（おすすめ・マイリスト）。
+データベース: MySQL 8.0.26
 
-商品詳細: 商品情報、コメント一覧、いいね機能。
+ツール: Docker / Docker Compose
 
-決済機能: Stripe API を利用したクレジットカードおよびコンビニ決済。
+## 2. 作成した機能
 
-配送先管理: 購入時の配送先住所変更機能。
+ユーザー認証機能
 
-## 2. 環境構築
+・ユーザー登録・ログイン・ログアウト
 
-Docker ビルド
+・メール認証機能
 
-git clone <レポジトリURL>
-docker-compose up -d --build
+商品管理機能
 
+・商品出品（画像アップロード・カテゴリー・状態・価格設定）
 
-Laravel セットアップ
+・商品一覧表示（おすすめ・マイリストの切り替え）
 
-docker-compose exec php bash
-composer install
-cp .env.example .env  # その後、.env 内の DB_HOST=db や Stripe キーを設定
-php artisan key:generate
-php artisan migrate:fresh --seed
+・商品詳細表示・検索機能
 
+・ユーザーアクション機能
+
+・いいね機能（マイリスト保存）
+
+・コメント投稿機能
+
+購入・決済機能
+
+・Stripe API 連携（クレジットカード決済・コンビニ決済）
+
+・購入履歴の管理
+
+・プロフィール・配送先管理
+
+・プロフィール編集（名前・画像・住所の設定）
+
+・商品購入時の配送先変更機能（セッション管理）
 
 ## 3. 開発環境
 
@@ -37,27 +50,14 @@ php artisan migrate:fresh --seed
 
 phpMyAdmin: http://localhost:8080/
 
-## 4. 使用技術（実行環境）
 
-PHP: 8.1.34
-
-Framework: Laravel 8.x
-
-Database: MySQL 8.0.26
-
-Web Server: nginx 1.21.1
-
-Infrastructure: Docker / Docker Compose
-
-Payment: Stripe API
-
-## 5. テストの実行
+## 4. テストの実行
 
 全てのテストケース（Feature/Unit）をパスすることを確認済みです。
 
 docker-compose exec php php artisan test
 
-## 6. ER図
+## 5. ER図
 
 ```mermaid
 erDiagram
