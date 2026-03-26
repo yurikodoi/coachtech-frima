@@ -82,60 +82,92 @@ docker-compose exec php php artisan test
 ```mermaid
 
 erDiagram
-users ||--o{ items : "出品"
-users ||--o{ likes : "いいね"
-users ||--o{ comments : "コメント"
-users ||--o{ orders : "購入"
-items ||--o{ category_item : "カテゴリ紐付け"
-categories ||--o{ category_item : "構成"
-items ||--|| orders : "注文確定"
+    users ||--o{ items : "出品"
+    users ||--o{ likes : "いいね"
+    users ||--o{ comments : "コメント"
+    users ||--o{ orders : "購入"
+    users ||--o{ mylists : "マイリスト保存"
+    items ||--o{ category_item : "カテゴリ紐付け"
+    items ||--o{ mylists : "マイリスト登録"
+    categories ||--o{ category_item : "構成"
+    items ||--|| orders : "注文確定"
 
     users {
-        bigint id PK
-        string name
-        string email UK
-        string password
-        string postcode
-        string address
-        string building
-        string profile_image "プロフ画像用"
+        bigint id PK "NOT NULL"
+        varchar name "NOT NULL"
+        varchar email UK "NOT NULL"
+        timestamp email_verified_at "NULLABLE"
+        varchar password "NOT NULL"
+        varchar postcode "NULLABLE"
+        varchar address "NULLABLE"
+        varchar building "NULLABLE"
+        varchar profile_image "NULLABLE"
+        varchar remember_token "NULLABLE"
+        timestamp created_at
+        timestamp updated_at
     }
 
     items {
-        bigint id PK
-        bigint user_id FK
-        string name
-        string brand
-        integer price
-        text description
-        integer condition
-        string image_url
-        boolean is_sold "売却済フラグ"
+        bigint id PK "NOT NULL"
+        bigint user_id FK "NOT NULL"
+        varchar name "NOT NULL"
+        varchar brand "NULLABLE"
+        int price "NOT NULL"
+        text description "NOT NULL"
+        varchar image_url "NOT NULL"
+        varchar condition "NOT NULL"
+        tinyint is_sold "DEFAULT 0"
+        timestamp created_at
+        timestamp updated_at
     }
 
     categories {
-        bigint id PK
-        string name
+        bigint id PK "NOT NULL"
+        varchar name "NOT NULL"
+        timestamp created_at
+        timestamp updated_at
     }
 
     orders {
-        bigint id PK
-        bigint user_id FK
-        bigint item_id FK
-        string shipping_postal_code
-        string shipping_address
-        string shipping_building
+        bigint id PK "NOT NULL"
+        bigint user_id FK "NOT NULL"
+        bigint item_id FK "NOT NULL"
+        varchar shipping_postal_code "NOT NULL"
+        varchar shipping_address "NOT NULL"
+        varchar shipping_building "NULLABLE"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    mylists {
+        bigint id PK "NOT NULL"
+        bigint user_id FK "NOT NULL"
+        bigint item_id FK "NOT NULL"
+        timestamp created_at
+        timestamp updated_at
     }
 
     likes {
-        bigint id PK
-        bigint user_id FK
-        bigint item_id FK
+        bigint id PK "NOT NULL"
+        bigint user_id FK "NOT NULL"
+        bigint item_id FK "NOT NULL"
+        timestamp created_at
+        timestamp updated_at
     }
 
     comments {
-        bigint id PK
-        bigint user_id FK
-        bigint item_id FK
-        text content
+        bigint id PK "NOT NULL"
+        bigint user_id FK "NOT NULL"
+        bigint item_id FK "NOT NULL"
+        text comment "NOT NULL"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    category_item {
+        bigint id PK "NOT NULL"
+        bigint category_id FK "NOT NULL"
+        bigint item_id FK "NOT NULL"
+        timestamp created_at
+        timestamp updated_at
     }
