@@ -110,3 +110,19 @@ input[name="tab_item"] {
     margin: 0;
     text-align: left;
 }
+
+.item-image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.label-sold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ff4b4b;
+    color: white;
+    padding: 5px 15px;
+    font-weight: bold;
+    z-index: 1;
+}

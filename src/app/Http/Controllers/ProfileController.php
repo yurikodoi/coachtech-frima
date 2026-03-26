@@ -6,12 +6,15 @@ use App\Http\Requests\ProfileRequest;
 use App\Models\Order;
 class ProfileController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $items = $user->items;
         $orders = Order::where('user_id', $user->id)->with('item')->get();
-        return view('profile.index', compact('user', 'items', 'orders'));
+
+        $page = $request->query('page', 'sell');
+
+        return view('profile.index', compact('user', 'items', 'orders', 'page'));
     }
     public function edit()
     {
@@ -21,11 +24,15 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $data = $request->validated();
+
         unset($data['image']);
+
         $user->fill($data);
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('profiles', 'public');
-            $user->image = $path;
+
+            $user->profile_image = $path;
         }
         $user->save();
         return redirect('/')->with('message', 'プロフィールを更新しました');

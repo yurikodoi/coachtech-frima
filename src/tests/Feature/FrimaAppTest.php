@@ -78,7 +78,7 @@ class FrimaAppTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user)->post('/mypage/profile', ['postcode' => '1234567'])
-             ->assertSessionHasErrors(['postcode' => '郵便番号はハイフンを含めて入力してください']);
+             ->assertSessionHasErrors(['postcode' => '郵便番号はハイフンありの8文字で入力してください']);
     }
     public function test_shipping_address_change_reflects_on_purchase_page()
     {

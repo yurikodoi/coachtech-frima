@@ -23,7 +23,7 @@ class ProfileRequest extends FormRequest
             'name.required'      => 'お名前を入力してください',
             'name.max'           => 'ユーザー名は20文字以内で入力してください',
             'postcode.required'  => '郵便番号を入力してください',
-            'postcode.regex'     => '郵便番号はハイフンを含めて入力してください',
+            'postcode.regex'     => '郵便番号はハイフンありの8文字で入力してください',
             'address.required'   => '住所を入力してください',
             'image.image'        => '画像ファイルを選択してください',
             'image.mimes'        => '画像はjpegまたはpng形式でアップロードしてください',
