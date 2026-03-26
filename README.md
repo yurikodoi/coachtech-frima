@@ -2,7 +2,7 @@
 
 このプロジェクトは、Laravel と Docker を使用して構築された、ユーザー間で商品の売買ができるフルスタックのフリマアプリケーションです。
 
-1. 機能一覧
+##1. 機能一覧
 
 ユーザー認証: 新規登録、ログイン、メール認証機能。
 
@@ -16,7 +16,7 @@
 
 配送先管理: 購入時の配送先住所変更機能。
 
-2. 環境構築手順
+##2. 環境構築手順
 
 　1. リポジトリのクローン
  
@@ -49,7 +49,7 @@ docker-compose exec php php artisan storage:link
  
 docker-compose exec php php artisan migrate:fresh --seed
 
-3. 開発環境
+##3. 開発環境
 
 アプリケーションURL: http://localhost/
 
@@ -57,7 +57,7 @@ docker-compose exec php php artisan migrate:fresh --seed
 
 phpMyAdmin: http://localhost:8080/
 
-4. 使用技術（実行環境）
+##4. 使用技術（実行環境）
 
 PHP: 8.4.x (fpm)
 
@@ -71,13 +71,13 @@ Infrastructure: Docker / Docker Compose
 
 Payment: Stripe API
 
-5. テストの実行
+##5. テストの実行
 
 全てのテストケース（Feature/Unit）をパスすることを確認済みです。
 
 docker-compose exec php php artisan test
 
-6. ER図
+##6. ER図
 
 erDiagram
 users ||--o{ items : "出品"
