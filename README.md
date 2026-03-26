@@ -19,24 +19,34 @@
 2. 環境構築手順
 
 　1. リポジトリのクローン
+ 
 git clone git@github.com:yurikodoi/coachtech-frima.git
 cd coachtech-frima
 
 　2. 環境設定ファイルの準備
+ 
 cd src
 cp .env.example .env
 
 　3. Docker コンテナの起動
+
+ 
 docker-compose up -d --build
 
 　4. 依存ライブラリのインストールとキー生成
+
+ 
 docker-compose exec php composer install
 docker-compose exec php php artisan key:generate
 
 　5. シンボリックリンクの作成
+
+ 
 docker-compose exec php php artisan storage:link
 
 　6. データベースの構築と初期データの投入
+
+ 
 docker-compose exec php php artisan migrate:fresh --seed
 
 3. 開発環境
